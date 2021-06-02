@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Thêm tài khoản</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link th:href ="@{/style.css}" type="text/css" rel="stylesheet" >
+</head>
+<body>
+	<main>
+			<h1></h1>
+			<h1 style="text-align: center; font-size: 24px;">Chào mừng đến với hệ thống quản lý sổ tiết kiệm ngân hàng</h1>
+			<div class="login-form">
+				<form th:action="@{/luutaikhoan}" method="post" th:object="${tknh}">
+					<h1>Thêm tài khoản</h1>
+					<div class="input-box">
+						<i></i> <input type="text" th:field = "*{sotaikhoan}" placeholder="Nhập số tài khoản" required="required">
+					</div>
+					<div class="input-box">
+						<i></i> <input type="text" th:field = "*{hoten}" placeholder="Nhập họ tên" required="required">
+					</div>
+					<div class="input-box">
+						<i></i> <input type="text" th:field = "*{diachi}" placeholder="Nhập địa chỉ" required="required">
+					</div>
+					<div class="input-box">
+						<i></i> <input type="text" th:field = "*{ngaysinh1}" placeholder="Nhập ngày sinh" required="required">
+					</div>
+					<div class="input-box">
+						<i></i> <input type="text" th:field = "*{sdt}" placeholder="Nhập số điện thoại" required="required" pattern="[0-9]{10,11}">
+					</div>
+					<div class="input-box">
+						<i></i> <input type="text" th:field = "*{email}" placeholder="Nhập email" required="required">
+					</div>
+					<div class="input-box">
+						<i></i> <input type="text" th:field = "*{cmnd}" placeholder="Nhập CMND" required="required">
+					</div>
+					<div class="btn-box">
+						<button type="submit" style="text-align: left;">Tiếp tục</button>
+					</div>
+				</form>
+			</div>
+
+	</main>
+</body>
+</html>

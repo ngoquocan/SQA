@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Trang chủ</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+header{
+    background-color: #cccccc;
+    min-height: 70px;
+    padding: 15px;
+}
+main{
+    min-height: 300px;
+    padding: 7.5px 15px;
+}
+footer{
+    background-color: #cccccc;
+    min-height: 70px;
+    padding: 15px;
+}
+.login-form{
+    width: 100%;
+    max-width: 400px;
+  	background-color: #FFFFFF;
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    text-align: center;
+}
+h1{
+    color: #868787;
+    font-size: 20px;
+    margin-bottom: 30px;
+    padding-top: 16px;
+}
+.input-box{
+    margin-bottom: 10px;
+}
+.input-box input{
+    padding: 7.5px 15px;
+    width: 100%;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    outline: none;
+}
+.btn-box{
+    margin-top: 30px;
+}
+.btn-box button{
+    padding: 7.5px 15px;
+    border-radius: 2px;
+    background-color: #45a049;
+    color: #ffffff;
+    border: none;
+    outline: none;
+}
+input[type=text]:focus {
+  background-color: lightblue;
+}
+ul{
+	list-style-type: none;
+	overflow: hidden;
+	background-color: #45a049;
+}
+li{
+	float: left;
+}
+li a{
+	display: inline-block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+li a:hover {
+	background-color: white;
+	color: black;
+}
+.dangxuat li a{
+	display: inline-block;
+	color: black;
+	text-align: center;
+	padding: 5px 5px;
+	text-decoration: underline;
+}
+.dangxuat li a:hover{
+	color: #FC058D;
+}
+li.dropdown{
+	display: inline-block;
+}
+.dropdown-content{
+	display: none;
+	position: absolute;
+	background: #45a049;
+	min-width: 160px;
+	z-index: 1;
+}
+.dropdown-content a{
+	color: white;
+	padding: 12px 50px 12px 16px;
+	text-decoration: none;
+	display: block;
+	text-align: left;
+}
+.dropdown-content a:hover {
+	background-color: white;
+	color: black;
+}
+.dropdown:hover .dropdown-content{
+	display: block;
+}
+</style>
+</head>
+<body>
+	<main>		<form>
+				<div class= "dangxuat">
+					<ul style="background-color: white;">
+						<li style="float: right"> <a th:href="@{/}">Đăng xuất</a> </li>
+					</ul>	
+				</div>			
+					<ul>
+						<li> <a style="color: black; background-color: white; text-decoration: underline;" th:href="@{'../admin'}">Trang chủ</a>
+						<li class ="dropdown"> 
+							<a class = "dropbtn">Quản lý tài khoản</span></a>
+							<div class = "dropdown-content">
+								<a >Thêm tài khoản ngân hàng</a>
+								<a >Sửa tài khoản ngân hàng</a>
+								<a >Xóa tài khoản ngân hàng</a>
+							</div>
+							
+						</li>
+						
+						<li class ="dropdown"> 
+							<a class = "dropbtn">Quản lý khách hàng</span></a>
+							<div class = "dropdown-content">
+								<a >Thêm khách hàng</a>
+								<a >Sửa khách hàng</a>
+								<a >Xóa khách hàng</a>
+							</div>
+							
+						</li>
+						
+						<li class ="dropdown"> 
+							<a class = "dropbtn">Quản lý sổ tiết kiệm</span></a>
+							<div class = "dropdown-content">
+								<a >Thêm sổ tiết kiệm</a>
+								<a >Sửa sổ tiết kiệm</a>
+								<a >Xóa sổ tiết kiệm</a>
+							</div>
+							
+						</li>
+					</ul>
+				</form>
+	</main>
+</body>
+</html>

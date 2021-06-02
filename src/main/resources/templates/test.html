@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Thông tin cá nhân</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="loans HTML Template">
+  <meta name="keywords" content="loans, html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<div id="preloder">
+		<div class="loader"></div>
+	</div>
+  <!-- Giới thiệu -->
+  <section class="about-section spad" th:object = "${kyhan}">          
+      <span id="money">10000</span>
+
+  </section>
+<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.slicknav.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+	
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script type="text/javascript" src="js/simple.money.format.js"></script>
+  <script type="text/javascript">
+    $('#money').simpleMoneyFormat();
+  </script>
+  </body>
+</html>

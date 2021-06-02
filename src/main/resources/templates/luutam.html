@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Tính lãi</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link th:href ="@{/style.css}" type="text/css" rel="stylesheet" >
+</head>
+<body>
+	<main>
+			<form th:object="${tkmk}">	
+				<div class= "dangxuat">
+					<ul style="background-color: white;">
+						<li style="float: right"> <a th:href="@{/}">Đăng xuất</a> </li>
+						<li style="float: right"> <a th:href="@{'/ttkh/' + *{id}}" th:text = "*{tknh.hoten}"></a> </li>
+					</ul>	
+				</div>				
+					<ul>
+						<li> <a th:href="@{'/trangchu/' + *{id} }">Trang chủ</a> </li>
+						<li> <a th:href="@{'/moso/' + *{id} }">Mở sổ tiết kiệm</a> </li>
+						<li> <a th:href="@{'/rutso/' + *{id} }">Rút sổ tiết kiệm</a> </li>
+						<li> <a style="color: black; background-color: white; text-decoration: underline;" th:href="@{'/tinhlai/' + *{id} }">Tính lãi</a> </li>
+					</ul>
+			</form>
+			<h1 style="text-align: center; font-size: 24px;">Chào mừng đến với hệ thống quản lý sổ tiết kiệm ngân hàng</h1>
+			<div class="login-form" style="max-width: 800px;">
+				<form  th:action="@{'/tinhlai/tinhlaistk/' + ${stk.id} }"  method="get" th:object="${stk}">
+					<h1>Thông tin chi tiết tiền lãi</h1>
+					<h2>Chủ tài khoản: <span th:text= "*{khachhang.tknh.hoten}"></span></h2>
+					<h2>Số tài khoản: <span th:text= "*{khachhang.tknh.sotaikhoan}"></span></h2>
+					<h2 style="text-align: center;">-----------------------------</h2>
+					
+					<h2>Mã sổ tiết kiệm:</h2>
+					<div class="input-box">
+						<i></i> <input type="text" th:field = "*{maStk}" readonly>
+					</div>
+					<h2>Ngày mở:</h2>
+					<div class="input-box">
+						<i></i> <input type="text" th:field = "*{ngaymo}" readonly>
+					</div>
+					<h2>Kỳ hạn:</h2>
+					<select name = "kyhan">
+						<option th:value="${stk.kyhan.id}"  th:text= "${stk.kyhan.tenkyhan} + ' (' + ${stk.kyhan.laisuat} + '%/năm)'" > </option>
+					</select>
+					<h2>Đáo hạn</h2>
+					<select name = "daohan">
+						<option th:value="${stk.daohan.id}"  th:text= "${stk.daohan.loaidaohan}" > </option>
+					</select>
+					<h2>Số tiền:</h2>
+					<div class="input-box">
+						<i></i> <input type="text" th:field = "*{sotien}" readonly>
+					</div>
+					<h2>Ngày muốn đóng:</h2>
+					<div class="input-box">
+						<i></i> <input type="date" th:field = "*{ngaydong}" placeholder="Nhập ngày muốn tính lãi(yyyy-MM-dd)" required="required">
+					</div>
+					<div class="btn-box">
+						<button type="submit" style="text-align: left;">Tính Lãi</button>
+					</div>
+					<table border = "1">
+    						<tr>
+       					 		<th>Ngày mở</th>
+        						<th>Ngày đóng</th>
+        						<th>Lãi suất(%/năm)</th>
+        						<th>Tiền lãi(vnđ)</th>
+        						<th>Tổng tiền(vnđ)</th>
+    						</tr>
+    						<tr th:each="item : ${stktam}">
+								<td th:text= "${item.ngaymo}"> </td>
+								<td th:text= "${item.ngaydong}"> </td>
+								<td th:text= "${item.kyhan.laisuat}"> </td>
+								<td th:text= "${item.tienlai}"> </td>
+								<td th:text= "${item.sotien}"> </td>
+							</tr>
+					</table>
+				</form>
+			</div>
+	</main>
+</body>
+</html>

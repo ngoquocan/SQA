@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Mở sổ</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="loans HTML Template">
+	<meta name="keywords" content="loans, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+ 
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="css/owl.carousel.min.css"/>
+	<link rel="stylesheet" href="css/flaticon.css"/>
+	<link rel="stylesheet" href="css/slicknav.min.css"/>
+
+	<!-- Main Stylesheets -->
+	<link rel="stylesheet" href="css/style.css"/>
+
+
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<style>
+	.hero-form{
+		background: white;
+	}
+	.hero-form h2{
+		color: black;
+	}
+	.hero-form input{
+		border: 1px solid black;
+	}
+	.hero-form label{
+		color: black;
+	}
+	</style>
+
+</head>
+<body onload="setFocus()">
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Header Section -->
+	<header class="header-section" >
+		<nav class="header-nav" th:object="${tkmk}">
+			<ul class="main-menu">
+				<li><a th:href="@{'/trangchu' + *{id} }">Trang chủ</a></li>
+				<li><a th:href="@{'/ttkh' + *{id}}" >Thông tin cá nhân</a></li>
+				<li><a href="#">Quản lý sổ tiết kiệm</a>
+					<ul class="sub-menu">
+						<li><a th:href="@{'/moso' + *{id} }">Mở sổ tiết kiệm</a></li>
+						<li><a th:href="@{'/rutso' + *{id} }">Đóng sổ tiết kiệm</a></li>
+						<li><a th:href="@{'/tinhlai' + *{id} }">Tính lãi</a></li>
+						<li><a th:href="@{'/liststk' + *{id} }">Sổ tiết kiệm của bạn</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Liên hệ</a>
+					<ul class="sub-menu">
+						<li><a href="#">Facebook</a></li>
+						<li><a href="#">Hotline: 0123456789</a></li>
+					</ul>
+				</li>
+				<li><a href="#" id="notificationLink">Thông báo <span id="notification_count" th:text = "${soluongthongbao}"></span> </a> 
+					<ul class="sub-menu" style="width: 340px; padding-bottom: 0px;">
+						<th:block th:each = "item : ${listthongbao}">
+							<li><a th:href="@{'/thongbao' + ${item.id}}" th:text = "${item.gio} + ' ' + ${item.ngay} + ' Biến động số dư: ' + ${item.noidung}"> </a></li>
+						</th:block>
+						<li id = "notificationFooter">
+							<a th:href="@{'/lsgd' + ${tkmk.id}}" >Xem tất cả</a>
+						</li>
+					</ul>
+				</li>
+				<li><a th:href="@{/}">Đăng xuất</a></li>
+			</ul>
+		</nav>
+	</header>
+	<!-- Header Section end -->
+
+	<!-- ảnh đầu trang -->
+	<section class="page-top-section set-bg" data-setbg="img/page-top-bg/1.jpg">
+		<div class="container">
+			<h2>Quản lý sổ tiết kiệm</h2>
+			<nav class="site-breadcrumb">
+				<a class="sb-item" th:href="@{'/liststk' + ${tkmk.id} }"> Quản lý sổ tiết kiệm</a>
+				<span class="sb-item active">Mở sổ tiết kiệm</span>
+			</nav>
+		</div>
+	</section>
+	<!-- Page top Section end -->
+
+	<!-- Hero Section end -->
+	<section class="about-section spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-5" style="text-align: center;">
+					<form class="hero-form" th:object="${stk}">
+						<h1 style="color: black; font-size: 20px; margin-bottom: 30px;text-align: left;">Thông tin tài khoản</h1>
+						<h1 style="color: white; margin-bottom: 5px; text-align: left;font-size: 16px" th:text = "${thongbao}"></h1>
+						<table>
+							<tr>
+								<td style="width: 36%;">
+									<h2>Chủ tài khoản:</h2>
+								</td>
+								<td style="width: 64%;">
+									<h2 th:text= *{khachhang.tknh.hoten}></h2>
+								</td>
+							</tr>
+							<tr>
+								<td >
+									<h2 >Số tài khoản:</h2>
+								</td>
+								<td >
+									<h2 th:text= *{khachhang.tknh.sotaikhoan}></h2>
+								</td>
+							</tr>
+							<tr>
+								<td >
+									<h2>Số dư khả dụng:</h2>
+								</td>
+								<td >
+									<h2 class = "money" th:text= " *{khachhang.tknh.sodu}"></h2>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+				<div class="col-lg-7" style="text-align: center;">
+					<form class="hero-form" th:action="@{'/luuSTK' + ${tkmk.id} }"  method="get" th:object="${stk}">
+						<h1 style="color: black; font-size: 20px; margin-bottom: 30px;">Xác nhận thông tin sổ tiết kiệm</h1>
+						<h1 style="color: #F62217; margin-bottom: 5px; text-align: left;font-size: 16px"  th:text = "${thongbao}"></h1>
+						<table>
+						<tr>
+							<td style="width: 36%;"><h2>Mã sổ tiết kiệm:</h2> </td>
+							<td style="width: 64%;">
+								<div> 
+									<input type="text" th:field = "*{maStk}" readonly>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td ><h2>Ngày mở:</h2> </td>
+							<td >
+								<div> 
+									<input type="text" th:field = "*{ngaymo}" readonly>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><h2>Ngày đóng:</h2> </td>
+							<td>
+								<div> 
+									<input type="text" th:field = "*{ngaydong}" readonly>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><h2>Kỳ hạn:</h2> </td>
+							<td>
+								<select name = "kyhan">
+									<option th:value="${stk.kyhan.id}"  th:text= "${stk.kyhan.tenkyhan} + ' (' + ${stk.kyhan.laisuat} + '%/năm)'" > </option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td><h2>Đáo hạn:</h2> </td>
+							<td>
+								<select name = "daohan">
+									<option th:value="${stk.daohan.id}"  th:text= "${stk.daohan.loaidaohan}" > </option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td><h2>Số tiền gửi (VNĐ):</h2> </td>
+							<td>
+								<div> 
+									<input type="text" th:field = "*{sotien}" readonly>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><h2>Tiền lãi (VNĐ):</h2> </td>
+							<td>
+								<div> 
+									<input type="text" th:field = "*{tienlai}" readonly>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><h2>Nhập OTP:</h2> </td>
+							<td>
+								<div> 
+									<input id = "fc" type="text" name = otp placeholder="Nhập OTP tạm thời là 0000" required="required" pattern="[0-9]{4}" title="OTP phải là số và có 4 ký tự">
+								</div>
+							</td>
+						</tr>
+					</table>	
+						<div>    						
+    						<label style="text-align: left;" ><input type="checkbox" class="form-check-input" id="checkbox" required="required">Tôi đồng ý với các điều khoản và chính sách bảo mật của ngân hàng</label>
+ 						</div>			
+						<button class="site-btn" type="submit">Mở sổ</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero Section end -->
+
+
+	<!-- Footer Section -->
+	<footer class="footer-section">
+		<div class="container">
+			<a th:href="@{'/trangchu' + ${tkmk.id} }" class="footer-logo" >
+				<strong style="color: red;">PTIT</strong><strong style="color: white;">Bank</strong>
+			</a>
+			<div class="row">
+				<div class="col-lg-4 col-sm-6">
+					<div class="footer-widget">
+						<h2>Bạn sẽ làm gì</h2>
+						<ul>
+							<li><a href="#">Mở sổ tiết kiệm</a></li>
+							<li><a href="#">Thông tin ngân hàng</a></li>
+							<li><a href="#">Lãi suất</a></li>
+							<li><a href="#">Phương thức đáo hạn</a></li>
+							<li><a href="#">Hướng dẫn</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-4 col-sm-6">
+					<div class="footer-widget">
+						<h2>Điều khoản điều lệ</h2>
+						<ul>
+							<li><a href="#">Chính sách bảo mật</a></li>
+							<li><a href="#">Nguyên tắc gửi tiết kiệm</a></li>
+							<li><a href="#">Điều khoản trang web</a></li>
+							<li><a href="#">Hợp đồng</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-4 col-sm-6">
+					<div class="footer-widget">
+						<h2>Thông tin trang web</h2>
+						<ul>
+							<li><a href="#">Hỗ trợ khách hàng</a></li>
+							<li><a href="#">Câu hỏi thường gặp</a></li>
+							<li><a href="#">Sơ đồ trang web</a></li>
+							<li><a href="#">Facebook</a></li>
+							<li><a href="#">Hotline</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
+	</footer>
+	<!-- Footer Section end -->
+	
+	<!--====== Javascripts & Jquery ======-->
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.slicknav.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  	<script src="js/simple.money.format.js"></script>
+  	<script type="text/javascript">
+    	$('.money').simpleMoneyFormat();
+  	</script>
+	</body>
+</html>
